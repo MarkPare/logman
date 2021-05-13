@@ -1,0 +1,50 @@
+version: "3.9"
+
+# NOTE: I use this docker network locally sometimes
+# networks:
+#   default:
+#     external:
+#       name: my-network
+
+services:
+  node_1:
+    ports:
+      - "5555:5555"
+    expose:
+      - "5555"
+    environment:
+      MIX_ENV: "dev"
+      PORT: "5555"
+      NODE_ID: "node_1"
+    image: logman:latest
+    volumes:
+      - ./:/app
+    command: elixir --cookie cookie --sname node_1 -S mix run --no-halt
+
+  node_2:
+    ports:
+      - "5556:5556"
+    expose:
+      - "5556"
+    environment:
+      MIX_ENV: "dev"
+      PORT: "5556"
+      NODE_ID: "node_2"
+    image: logman:latest
+    volumes:
+      - ./:/app
+    command: elixir --cookie cookie --sname node_2 -S mix run --no-halt
+
+  node_3:
+    ports:
+      - "5557:5557"
+    expose:
+      - "5557"
+    environment:
+      MIX_ENV: "dev"
+      PORT: "5557"
+      NODE_ID: "node_3"
+    image: logman:latest
+    volumes:
+      - ./:/app
+    command: elixir --cookie cookie --sname node_3 -S mix run --no-halt
